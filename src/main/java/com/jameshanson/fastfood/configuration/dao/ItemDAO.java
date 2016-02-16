@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface ItemDAO {
     
+    public Item createItem(Long id, String name, Double price, int foodType) throws Exception;
     public List<Item> getAllItems(Long id) throws Exception;
     
 }
