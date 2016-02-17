@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jameshanson.fastfood.configuration.dao;
+package com.jameshanson.fastfood.dao;
 
 import com.jameshanson.fastfood.model.Item;
 import java.util.List;
@@ -14,7 +14,10 @@ import java.util.List;
  */
 public interface ItemDAO {
     
-    public Item createItem(Long id, String name, Double price, int foodType) throws Exception;
-    public List<Item> getAllItems(Long id) throws Exception;
+    public Item createItem(Item item) throws Exception;
+    public Item updateItem(Item item) throws Exception;
+    public Item retrieveItem(Long id) throws Exception;
+    public Item deleteItem(Long id) throws Exception;
+    public List<Item> getAllItems() throws Exception;
     
 }

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jameshanson.fastfood.configuration.dao;
+package com.jameshanson.fastfood.dao;
 
 import com.jameshanson.fastfood.model.Item;
-import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,19 +16,51 @@ import javax.persistence.Query;
  *
  * @author james
  */
-public class ItemDAOImpl {
+public class ItemDAOImpl implements ItemDAO {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistence");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.jameshanson_fastfood_war_1.0-SNAPSHOTPU");
 
-    public Item createItem(Long id, String name, Double price, int foodType) 
-        throws Exception {
-        return null;
+    public ItemDAOImpl(){
+        
+    }
+    
+    @Override
+    public Item createItem(Item item) throws Exception {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            em.persist(item);
+            em.getTransaction().commit();
+
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return item;
+    }
+    
+    @Override
+    public Item updateItem(Item item) throws Exception {
+        EntityManager em = emf.createEntityManager();
+         try {
+            em.getTransaction().begin();
+            em.merge(item);
+            em.getTransaction().commit();
+
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return item;
     }
 
-    public List<Item> getAllItems(Long id) throws Exception {
+    @Override
+    public List<Item> getAllItems() throws Exception {
 
-        
-        EntityManager em = emf.createEntityManager();         
+        EntityManager em = emf.createEntityManager();
         List<Item> items = null;
 
         try {
@@ -41,5 +72,29 @@ public class ItemDAOImpl {
             }
         }
         return items;
+    }
+
+    @Override
+    public Item retrieveItem(Long id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Item deleteItem(Long id) throws Exception {
+         //To change body of generated methods, choose Tools | Templates.
+         EntityManager em = emf.createEntityManager();
+         Item item = em.find(Item.class, id);
+         
+         try {
+             em.getTransaction().begin();
+             em.remove(item);
+             em.getTransaction().commit();
+         } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+         
+         return item;
     }
 }
