@@ -48,9 +48,6 @@ public class ItemService {
 
     public Item addItem(Item item) {
         try {
-//        item.setId(items.size() + 1);
-//        items.put(item.getId(), item);
-//        return item;
             System.out.println(item);
             itemDao.createItem(item);
         } catch (Exception ex) {

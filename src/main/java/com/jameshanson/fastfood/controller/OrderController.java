@@ -5,10 +5,15 @@
  */
 package com.jameshanson.fastfood.controller;
 
+import com.jameshanson.fastfood.service.OrderService;
+import javax.ws.rs.Path;
+
 /**
  *
  * @author james
  */
+@Path("orders")
 public class OrderController {
+    OrderService orderService = new OrderService();
     
 }
