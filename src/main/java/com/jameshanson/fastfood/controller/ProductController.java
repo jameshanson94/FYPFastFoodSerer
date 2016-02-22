@@ -5,8 +5,8 @@
  */
 package com.jameshanson.fastfood.controller;
 
-import com.jameshanson.fastfood.model.Item;
-import com.jameshanson.fastfood.service.ItemService;
+import com.jameshanson.fastfood.model.Product;
+import com.jameshanson.fastfood.service.ProductService;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,45 +22,45 @@ import javax.ws.rs.core.MediaType;
  *
  * @author James
  */
-@Path("items")
-public class ItemController {
+@Path("products")
+public class ProductController {
 
-    ItemService itemService = new ItemService();
+    ProductService productService = new ProductService();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Item> getItems() {
-        return itemService.getItems();
+    public List<Product> getProduct() {
+        return productService.getProducts();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Item addItem(Item item) {
-        return itemService.addItem(item);
+    public Product addProduct(Product product) {
+        return productService.addProduct(product);
     }
 
     @PUT
-    @Path("{itemId}")
+    @Path("{productId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Item updateItem(@PathParam("itemId") long itemId, Item item) {
-        item.setId(itemId);
-        return itemService.updateItem(item);
+    public Product updateProduct(@PathParam("productId") long productId, Product product) {
+        product.setId(productId);
+        return productService.updateProduct(product);
     }
     
     @DELETE
-    @Path("{itemId}")
+    @Path("{productId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteItem(@PathParam("itemId") long itemId) {
-        itemService.deleteItem(itemId);        
+    public void deleteProject(@PathParam("productId") long productId) {
+        productService.deleteProduct(productId);        
     }
 
     @GET
-    @Path("{itemId}")
+    @Path("{productId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Item getItem(@PathParam("itemId") long itemId) {
-        return itemService.getItem(itemId);
+    public Product getProduct(@PathParam("productId") long productId) {
+        return productService.getProduct(productId);
     }
 
 }

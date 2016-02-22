@@ -5,7 +5,7 @@
  */
 package com.jameshanson.fastfood.dao;
 
-import com.jameshanson.fastfood.model.Item;
+import com.jameshanson.fastfood.model.Product;
 import com.jameshanson.fastfood.model.Order;
 import java.util.List;
 import javax.persistence.EntityManager;

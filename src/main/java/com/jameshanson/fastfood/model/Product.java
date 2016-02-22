@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author James
  */
 @Entity
-public class Item implements Serializable {
+public class Product implements Serializable {
     
     @Id
     private long id;
@@ -24,10 +24,10 @@ public class Item implements Serializable {
     private Double price;
     private int foodType;
 
-    public Item() {
+    public Product() {
     }
 
-    public Item(long id, String name, Double price, int foodType) {
+    public Product(long id, String name, Double price, int foodType) {
         this.id = id;
         this.name = name;
         this.price = price;
