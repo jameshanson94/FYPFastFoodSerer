@@ -7,7 +7,6 @@ package com.jameshanson.fastfood.service;
 
 import com.jameshanson.fastfood.dao.ItemDAO;
 import com.jameshanson.fastfood.dao.ItemDAOImpl;
-import com.jameshanson.fastfood.configuration.database.DatabaseClass;
 import com.jameshanson.fastfood.model.Item;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,20 +21,15 @@ import javax.inject.Inject;
  */
 public class ItemService {
 
-    private Map<Long, Item> items = DatabaseClass.getItems();
     private ItemDAO itemDao = new ItemDAOImpl();
 
     public ItemService() {
-        items.put(1L, new Item(1, "Pizza", 4.99, 1));
-        items.put(2L, new Item(2, "Pizza", 4.99, 1));
-        items.put(3L, new Item(3, "Pizza", 4.99, 1));
-        items.put(4L, new Item(4, "Pizza", 4.99, 1));
     }
 
     public List<Item> getItems() {
         try {
 //        return new ArrayList<Item>(items.values());            
-            return new ItemDAOImpl().getAllItems();
+            return itemDao.getAllItems();
         } catch (Exception ex) {
             Logger.getLogger(ItemService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -44,14 +38,16 @@ public class ItemService {
     }
 
     public Item getItem(long id) {
-        return items.get(id);
+        try {
+            return itemDao.retrieveItem(id);
+        } catch (Exception ex) {
+            Logger.getLogger(ItemService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public Item addItem(Item item) {
         try {
-//        item.setId(items.size() + 1);
-//        items.put(item.getId(), item);
-//        return item;
             System.out.println(item);
             itemDao.createItem(item);
         } catch (Exception ex) {
@@ -65,7 +61,7 @@ public class ItemService {
             return null;
         }
         try {
-            return new ItemDAOImpl().updateItem(item);
+            return itemDao.updateItem(item);
         } catch (Exception ex) {
             Logger.getLogger(ItemService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -74,7 +70,7 @@ public class ItemService {
 
     public Item deleteItem(long id) {        
         try {
-            return new ItemDAOImpl().deleteItem(id);
+            return itemDao.deleteItem(id);
         } catch (Exception ex) {
             Logger.getLogger(ItemService.class.getName()).log(Level.SEVERE, null, ex);
         }

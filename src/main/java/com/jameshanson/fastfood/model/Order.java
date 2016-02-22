@@ -7,7 +7,9 @@ package com.jameshanson.fastfood.model;
 
 import com.jameshanson.fastfood.model.OrderState.OrderState;
 import com.jameshanson.fastfood.model.OrderState.OrderedOrderState;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -21,6 +23,8 @@ public class Order {
     private OrderState orderState;
     private Date timeStamp;
     private long totalCost;
+    private List<Item> allItems;
+    
     
     public Order() {
         
@@ -33,6 +37,7 @@ public class Order {
         this.orderState = new OrderedOrderState();
         this.timeStamp = timeStamp;
         this.totalCost = totalCost;
+        allItems = new ArrayList<>();
     }
 
     public int getOrderId() {
@@ -81,6 +86,18 @@ public class Order {
 
     public void setTotalCost(long totalCost) {
         this.totalCost = totalCost;
+    }
+    
+    public void addItem(Item item) {
+        allItems.add(item);
+    }
+    
+    public void remoteItem(Item item) {
+        allItems.remove(item);
+    }
+    
+    public List<Item> getItems() {
+        return allItems;
     }
 
     @Override
