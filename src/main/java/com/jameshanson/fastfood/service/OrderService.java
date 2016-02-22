@@ -17,10 +17,11 @@ import java.util.logging.Logger;
  * @author james
  */
 public class OrderService {
-    
-    private final OrderDAO orderDAO =  new OrderDAOImpl();
-    
-    public OrderService() {}
+
+    private OrderDAO orderDAO = new OrderDAOImpl();
+
+    public OrderService() {
+    }
 
     public List<Order> getOrders() {
         try {
@@ -30,5 +31,40 @@ public class OrderService {
         }
         return null;
     }
-   
+
+    public Order addOrder(Order order) {
+        try {
+            orderDAO.createOrder(order);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return order;
+    }
+
+    public Order getOrder(int orderId) {
+        try {
+            return orderDAO.retrieveOrder(orderId);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public void updateOrder(Order order) {
+        try {
+            orderDAO.updateOrder(order);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void deleteOrder(int orderId) {
+        try {
+            orderDAO.deleteOrder(orderId);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }
+
