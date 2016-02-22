@@ -50,12 +50,13 @@ public class OrderService {
         return null;
     }
 
-    public void updateOrder(Order order) {
+    public Order updateOrder(Order order) {
         try {
             orderDAO.updateOrder(order);
         } catch (Exception e) {
             System.out.println(e);
         }
+        return order;
     }
 
     public void deleteOrder(int orderId) {

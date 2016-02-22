@@ -49,7 +49,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public void updateOrder(Order order) throws Exception {
+    public Order updateOrder(Order order) throws Exception {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -62,6 +62,7 @@ public class OrderDAOImpl implements OrderDAO {
                 em.close();
             }
         }
+        return order;
     }
 
     @Override

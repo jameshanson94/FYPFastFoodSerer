@@ -17,7 +17,7 @@ public interface OrderDAO {
     public List<Order> getOrders() throws Exception;
     public Order createOrder(Order order) throws Exception;
     public Order retrieveOrder(int orderId) throws Exception;
-    public void updateOrder(Order order) throws Exception;
+    public Order updateOrder(Order order) throws Exception;
     public void deleteOrder(int orderId) throws Exception;
     
     
