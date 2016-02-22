@@ -23,7 +23,7 @@ public class Order {
     private OrderState orderState;
     private Date timeStamp;
     private long totalCost;
-    private List<Product> allItems;
+    private List<Product> allProducts;
     
     
     public Order() {
@@ -37,7 +37,7 @@ public class Order {
         this.orderState = new OrderedOrderState();
         this.timeStamp = timeStamp;
         this.totalCost = totalCost;
-        allItems = new ArrayList<>();
+        allProducts = new ArrayList<>();
     }
 
     public int getOrderId() {
@@ -88,16 +88,16 @@ public class Order {
         this.totalCost = totalCost;
     }
     
-    public void addItem(Product item) {
-        allItems.add(item);
+    public void addProduct(Product product) {
+        allProducts.add(product);
     }
     
-    public void remoteItem(Product item) {
-        allItems.remove(item);
+    public void remoteProduct(Product product) {
+        allProducts.remove(product);
     }
     
-    public List<Product> getItems() {
-        return allItems;
+    public List<Product> getProducts() {
+        return allProducts;
     }
 
     @Override
