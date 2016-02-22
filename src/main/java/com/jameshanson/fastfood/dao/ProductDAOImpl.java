@@ -5,7 +5,7 @@
  */
 package com.jameshanson.fastfood.dao;
 
-import com.jameshanson.fastfood.model.Item;
+import com.jameshanson.fastfood.model.Product;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,19 +16,19 @@ import javax.persistence.Query;
  *
  * @author james
  */
-public class ItemDAOImpl implements ItemDAO {
+public class ProductDAOImpl implements ProductDAO {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.jameshanson_fastfood_war_1.0-SNAPSHOTPU");
 
-    public ItemDAOImpl(){ }
+    public ProductDAOImpl(){ }
     
     @Override
-    public Item createItem(Item item) throws Exception {
+    public Product createProduct(Product product) throws Exception {
         EntityManager em = emf.createEntityManager();
 
         try {
             em.getTransaction().begin();
-            em.persist(item);
+            em.persist(product);
             em.getTransaction().commit();
 
         } finally {
@@ -36,15 +36,15 @@ public class ItemDAOImpl implements ItemDAO {
                 em.close();
             }
         }
-        return item;
+        return product;
     }
     
     @Override
-    public Item updateItem(Item item) throws Exception {
+    public Product updateProduct(Product product) throws Exception {
         EntityManager em = emf.createEntityManager();
          try {
             em.getTransaction().begin();
-            em.merge(item);
+            em.merge(product);
             em.getTransaction().commit();
 
         } finally {
@@ -52,40 +52,40 @@ public class ItemDAOImpl implements ItemDAO {
                 em.close();
             }
         }
-        return item;
+        return product;
     }
 
     @Override
-    public List<Item> getAllItems() throws Exception {
+    public List<Product> getAllProducts() throws Exception {
 
         EntityManager em = emf.createEntityManager();
-        List<Item> items = null;
+        List<Product> products = null;
 
         try {
-            items = em.createQuery("SELECT i FROM Item i", Item.class).getResultList();
+            products = em.createQuery("SELECT P FROM Product P", Product.class).getResultList();
 //            items = query.getResultList();
         } finally {
             if (em != null) {
                 em.close();
             }
         }
-        return items;
+        return products;
     }
 
     @Override
-    public Item retrieveItem(Long id) throws Exception {
+    public Product retrieveProduct(Long id) throws Exception {
         EntityManager em = emf.createEntityManager();
-        return em.find(Item.class, id);
+        return em.find(Product.class, id);
     }
 
     @Override
-    public Item deleteItem(Long id) throws Exception {
+    public Product deleteProduct(Long id) throws Exception {
          EntityManager em = emf.createEntityManager();
-         Item item = em.find(Item.class, id);
+         Product product = em.find(Product.class, id);
          
          try {
              em.getTransaction().begin();
-             em.remove(item);
+             em.remove(product);
              em.getTransaction().commit();
          } finally {
             if (em != null) {
@@ -93,6 +93,6 @@ public class ItemDAOImpl implements ItemDAO {
             }
         }
          
-         return item;
+         return product;
     }
 }

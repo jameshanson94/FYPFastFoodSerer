@@ -23,7 +23,7 @@ public class Order {
     private OrderState orderState;
     private Date timeStamp;
     private long totalCost;
-    private List<Item> allItems;
+    private List<Product> allItems;
     
     
     public Order() {
@@ -88,15 +88,15 @@ public class Order {
         this.totalCost = totalCost;
     }
     
-    public void addItem(Item item) {
+    public void addItem(Product item) {
         allItems.add(item);
     }
     
-    public void remoteItem(Item item) {
+    public void remoteItem(Product item) {
         allItems.remove(item);
     }
     
-    public List<Item> getItems() {
+    public List<Product> getItems() {
         return allItems;
     }
 
