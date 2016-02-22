@@ -20,9 +20,7 @@ public class ItemDAOImpl implements ItemDAO {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.jameshanson_fastfood_war_1.0-SNAPSHOTPU");
 
-    public ItemDAOImpl(){
-        
-    }
+    public ItemDAOImpl(){ }
     
     @Override
     public Item createItem(Item item) throws Exception {
@@ -64,8 +62,8 @@ public class ItemDAOImpl implements ItemDAO {
         List<Item> items = null;
 
         try {
-            Query query = em.createQuery("SELECT i FROM Item i", Item.class);
-            items = query.getResultList();
+            items = em.createQuery("SELECT i FROM Item i", Item.class).getResultList();
+//            items = query.getResultList();
         } finally {
             if (em != null) {
                 em.close();
@@ -82,7 +80,6 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public Item deleteItem(Long id) throws Exception {
-         //To change body of generated methods, choose Tools | Templates.
          EntityManager em = emf.createEntityManager();
          Item item = em.find(Item.class, id);
          

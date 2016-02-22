@@ -5,8 +5,13 @@
  */
 package com.jameshanson.fastfood.controller;
 
+import com.jameshanson.fastfood.model.Order;
 import com.jameshanson.fastfood.service.OrderService;
+import java.util.List;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -15,5 +20,11 @@ import javax.ws.rs.Path;
 @Path("orders")
 public class OrderController {
     OrderService orderService = new OrderService();
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Order> getOrders() {
+        return orderService.getOrders();
+    }
     
 }
