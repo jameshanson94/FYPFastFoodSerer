@@ -18,22 +18,41 @@ import javax.persistence.Query;
  * @author james
  */
 public class OrderDAOImpl implements OrderDAO {
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.jameshanson_fastfood_war_1.0-SNAPSHOTPU");
-    public OrderDAOImpl() {}
+
+    public OrderDAOImpl() {
+    }
 
     @Override
     public List<Order> getOrders() throws Exception {
-       EntityManager em = emf.createEntityManager();
-       List<Order> orders = null;
-       
-       Query query = em.createQuery("SELECT o FROM Order o", Order.class);
-       orders = query.getResultList();
-       return orders;
+        EntityManager em = emf.createEntityManager();
+        List<Order> orders = null;
+
+        try {
+            orders = em.createQuery("SELECT O FROM Order O", Order.class).getResultList();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+
+        return orders;
     }
 
     @Override
     public Order createOrder(Order order) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(order);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return order;
     }
 
     @Override
@@ -41,9 +60,9 @@ public class OrderDAOImpl implements OrderDAO {
         EntityManager em = emf.createEntityManager();
         try {
             return em.find(Order.class, orderId);
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
-            
+
         }
         return null;
     }
@@ -58,7 +77,7 @@ public class OrderDAOImpl implements OrderDAO {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            if(em != null) {
+            if (em != null) {
                 em.close();
             }
         }
@@ -69,17 +88,17 @@ public class OrderDAOImpl implements OrderDAO {
     public void deleteOrder(int orderId) throws Exception {
         EntityManager em = emf.createEntityManager();
         Order order = em.find(Order.class, orderId);
-        
+
         try {
             em.getTransaction().begin();
             em.remove(order);
             em.getTransaction().commit();
         } finally {
-            if (em!= null) {
+            if (em != null) {
                 em.close();
             }
         }
-        
+
     }
-    
+
 }
