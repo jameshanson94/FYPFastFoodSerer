@@ -56,7 +56,7 @@ public class ProductService {
     }
 
     public Product updateProduct(Product product) {
-        if (product.getId() <= 0) {
+        if (product.getProductId() <= 0) {
             return null;
         }
         try {

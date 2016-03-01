@@ -12,5 +12,8 @@ import com.jameshanson.fastfood.model.Order;
  * @author james
  */
 public interface OrderState {
-    public void updateOrderState(Order order);    
+    public void prepareOrder(Order order); 
+    public void cancelOrder(Order order);
+    public void shipOrder(Order order);
+    public void deliverOrder(Order order);
 }

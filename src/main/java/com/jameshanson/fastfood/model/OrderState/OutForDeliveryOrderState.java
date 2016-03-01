@@ -11,7 +11,7 @@ import com.jameshanson.fastfood.model.Order;
  *
  * @author james
  */
-public class PreparingOrderState implements OrderState {
+public class OutForDeliveryOrderState implements OrderState {
 
     @Override
     public void prepareOrder(Order order) {

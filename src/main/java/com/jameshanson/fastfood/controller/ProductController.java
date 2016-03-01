@@ -45,7 +45,7 @@ public class ProductController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Product updateProduct(@PathParam("productId") long productId, Product product) {
-        product.setId(productId);
+        product.setProductId(productId);
         return productService.updateProduct(product);
     }
     
