@@ -5,9 +5,8 @@
  */
 package com.jameshanson.fastfood.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -19,27 +18,34 @@ import javax.persistence.Id;
 public class Product implements Serializable {
     
     @Id
-    private long id;
+    @Column(name="PRODUCT_ID")
+    private long productId;
+    
+    @Column(name="NAME")
     private String name;
+    
+    @Column(name="PRICE")
     private Double price;
+    
+    @Column(name="FOOD_TYPE")
     private int foodType;
 
     public Product() {
     }
 
-    public Product(long id, String name, Double price, int foodType) {
-        this.id = id;
+    public Product(long productId, String name, Double price, int foodType) {
+        this.productId = productId;
         this.name = name;
         this.price = price;
         this.foodType = foodType;
     }
 
-    public long getId() {
-        return id;
+    public long getProductId() {
+        return productId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -68,7 +74,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", name=" + name + ", price=" + price + ", foodType=" + foodType + '}';
+        return "Item{" + "id=" + productId + ", name=" + name + ", price=" + price + ", foodType=" + foodType + '}';
     }
     
     
